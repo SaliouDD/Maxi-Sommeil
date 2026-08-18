@@ -1,7 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Animated,
   Easing,
@@ -44,11 +42,6 @@ export default function App() {
   const pulse = useRef(new Animated.Value(0)).current;
 
   const breathingStep = breathingSteps[breathingIndex];
-  const gradient = useMemo(
-    () => ['#090d1f', '#15204a', '#26346f'],
-    [],
-  );
-
   useEffect(() => {
     const animation = Animated.loop(
       Animated.sequence([
@@ -90,7 +83,7 @@ export default function App() {
   });
 
   return (
-    <LinearGradient colors={gradient} style={styles.screen}>
+    <View style={styles.screen}>
       <StatusBar style="light" />
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -99,7 +92,7 @@ export default function App() {
               <Text style={styles.eyebrow}>Maxi Sommeil</Text>
               <Text style={styles.title}>Dors plus vite, sans pression.</Text>
             </View>
-            <Ionicons name="moon" size={34} color="#f8d98b" />
+            <Text style={styles.headerIcon}>☾</Text>
           </View>
 
           <View style={styles.card}>
@@ -143,7 +136,7 @@ export default function App() {
               onPress={() => setSelectedStory(story)}
               style={[styles.soundRow, selectedStory.title === story.title && styles.soundRowActive]}
             >
-              <Ionicons name="sparkles" size={20} color="#b9c6ff" />
+              <Text style={styles.rowIcon}>✦</Text>
               <View style={styles.soundTextWrap}>
                 <Text style={styles.soundTitle}>{story.title}</Text>
                 <Text style={styles.muted}>{story.duration} de visualisation guidée</Text>
@@ -152,24 +145,25 @@ export default function App() {
           ))}
 
           <View style={styles.footerCard}>
-            <Ionicons name="alarm-outline" size={22} color="#f8d98b" />
+            <Text style={styles.footerIcon}>⏱</Text>
             <Text style={styles.footerText}>
               Programme conseillé : écran posé, volume bas, minuteur {timerMinutes} minutes.
             </Text>
           </View>
         </ScrollView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1 },
+  screen: { flex: 1, backgroundColor: '#10162f' },
   safeArea: { flex: 1 },
   content: { padding: 22, paddingBottom: 34, gap: 18 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 8 },
   eyebrow: { color: '#aebcff', fontSize: 15, fontWeight: '700', letterSpacing: 1.4, textTransform: 'uppercase' },
   title: { color: '#ffffff', fontSize: 34, lineHeight: 40, fontWeight: '800', marginTop: 8, maxWidth: 300 },
+  headerIcon: { color: '#f8d98b', fontSize: 42, fontWeight: '800' },
   card: { backgroundColor: 'rgba(255,255,255,0.10)', borderColor: 'rgba(255,255,255,0.14)', borderWidth: 1, borderRadius: 28, padding: 20 },
   cardTitle: { color: '#ffffff', fontSize: 22, fontWeight: '800' },
   muted: { color: '#c8d0f7', fontSize: 14, lineHeight: 20, marginTop: 6 },
@@ -189,8 +183,10 @@ const styles = StyleSheet.create({
   sectionTitle: { color: '#ffffff', fontSize: 20, fontWeight: '800', marginTop: 4 },
   soundRow: { flexDirection: 'row', alignItems: 'center', gap: 14, padding: 16, borderRadius: 22, backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: 1, borderColor: 'transparent' },
   soundRowActive: { borderColor: '#f8d98b', backgroundColor: 'rgba(248,217,139,0.12)' },
+  rowIcon: { color: '#b9c6ff', fontSize: 20, fontWeight: '800' },
   soundTextWrap: { flex: 1 },
   soundTitle: { color: '#ffffff', fontSize: 16, fontWeight: '800' },
   footerCard: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: 'rgba(0,0,0,0.20)', borderRadius: 20, padding: 16 },
+  footerIcon: { color: '#f8d98b', fontSize: 22 },
   footerText: { color: '#e5e9ff', flex: 1, lineHeight: 21 },
 });
