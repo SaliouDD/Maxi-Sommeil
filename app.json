@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "Maxi Sommeil",
+    "slug": "maxi-sommeil",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.maxisommeil.app",
+      "versionCode": 1
+    }
+  }
+}
